@@ -51,5 +51,10 @@ namespace Kurs
             SalesManWindow salesMan=new SalesManWindow();
             salesMan.Show();
         }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

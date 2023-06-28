@@ -17,6 +17,7 @@
     <Window.Resources>
         <localMy:ToBuyerFIO x:Key="myConverter" />
         <localMy:FromRealEstate x:Key="fromRealEstate"/>
+        <localMy:FromRealtor x:Key="fromRealtor"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -33,7 +34,7 @@
                     <MenuItem Header="Риэлтер" Click="MenuItem_Click_2" ></MenuItem>
                     <MenuItem Header="Недвижимость" Click="MenuItem_Click_1" ></MenuItem>
                     <Separator />
-                    <MenuItem Header="Выход" ></MenuItem>
+                    <MenuItem Header="Выход" Click="MenuItem_Click_4" ></MenuItem>
                 </MenuItem>
             </Menu>
         </materialDesign:Card>
@@ -54,7 +55,7 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding ID_Buyer,Converter={StaticResource myConverter}}" FontSize="16"/>
                                     <TextBlock Text="{Binding ID_RealState,Converter={StaticResource fromRealEstate}}" FontSize="13" />
-                                    <TextBlock Text="{Binding ID_Realtor}" FontSize="13" />
+                                    <TextBlock Text="{Binding ID_Realtor,Converter={StaticResource fromRealtor}}" FontSize="13" />
                                     <TextBlock Text="{Binding ID_SalesMan}" FontSize="13" />
                                     <TextBlock Text="{Binding Price}" FontSize="13" />
                                     <TextBlock Text="{Binding Date}" FontSize="13" />

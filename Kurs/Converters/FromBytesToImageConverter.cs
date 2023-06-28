@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace Kurs.Model
+namespace Kurs.Converters
 {
     public class FromBytesToImageConverter : IValueConverter
     {

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-        xmlns:localMy="clr-namespace:Kurs.Model"
+        xmlns:localMy="clr-namespace:Kurs.Converters"
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -16,6 +16,7 @@
         Title="Агенство недвижимости" Height="700" Width="800">
     <Window.Resources>
         <localMy:ToBuyerFIO x:Key="myConverter" />
+        <localMy:FromRealEstate x:Key="fromRealEstate"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -52,7 +53,7 @@
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Text="{Binding ID_Buyer,Converter={StaticResource myConverter}}" FontSize="16"/>
-                                    <TextBlock Text="{Binding ID_RealState}" FontSize="13" />
+                                    <TextBlock Text="{Binding ID_RealState,Converter={StaticResource fromRealEstate}}" FontSize="13" />
                                     <TextBlock Text="{Binding ID_Realtor}" FontSize="13" />
                                     <TextBlock Text="{Binding ID_SalesMan}" FontSize="13" />
                                     <TextBlock Text="{Binding Price}" FontSize="13" />

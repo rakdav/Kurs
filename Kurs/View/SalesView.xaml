@@ -1,0 +1,121 @@
+﻿<Window x:Class="Kurs.SalesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+        xmlns:localMy="clr-namespace:Kurs.Model"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Агенство недвижимости" Height="700" Width="800">
+    <Window.Resources>
+        <localMy:ToBuyerFIO x:Key="myConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:Card Margin="5">
+            <Menu Grid.Row="0" VerticalAlignment="Top">
+                <MenuItem Header="Объекты БД">
+                    <MenuItem Header="Продавец" Click="MenuItem_Click" ></MenuItem>
+                    <MenuItem Header="Покупатель" Click="MenuItem_Click_3" ></MenuItem>
+                    <MenuItem Header="Риэлтер" Click="MenuItem_Click_2" ></MenuItem>
+                    <MenuItem Header="Недвижимость" Click="MenuItem_Click_1" ></MenuItem>
+                    <Separator />
+                    <MenuItem Header="Выход" ></MenuItem>
+                </MenuItem>
+            </Menu>
+        </materialDesign:Card>
+        <Grid Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="lbSales" Grid.Column="0" ItemsSource="{Binding SaleList}" SelectedItem="{Binding SelectedSale}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding ID_Buyer,Converter={StaticResource myConverter}}" FontSize="16"/>
+                                    <TextBlock Text="{Binding ID_RealState}" FontSize="13" />
+                                    <TextBlock Text="{Binding ID_Realtor}" FontSize="13" />
+                                    <TextBlock Text="{Binding ID_SalesMan}" FontSize="13" />
+                                    <TextBlock Text="{Binding Price}" FontSize="13" />
+                                    <TextBlock Text="{Binding Date}" FontSize="13" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="-" Width="100" Margin="50 0" Command="{Binding RemoveCommand}"
+                                CommandParameter="{Binding ElementName=lbSales,Path=SelectedItem}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Row="0">
+                        <Label Content="Выберите покупателя"/>
+                        <ComboBox x:Name="cbBuyer" Margin="10" ItemsSource="{Binding BuyerList}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding FirstName}"/>
+                                        <Label Content="{Binding SecondName}"/>
+                                        <Label Content="{Binding LastName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Выберите недвижимость"/>
+                        <ComboBox x:Name="cbRealState" Margin="10" ItemsSource="{Binding RealEstateList}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Street}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Выберите риэлтора"/>
+                        <ComboBox x:Name="cbRealtor" Margin="10" ItemsSource="{Binding RealtorList}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding FirstName}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Выберите продавца"/>
+                        <ComboBox x:Name="cbSalesMan" Margin="10" ItemsSource="{Binding SaleManList}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding FirstName}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Укажите цену продажи"/>
+                        <TextBox x:Name="Price" Margin="10" Text="{Binding Price}"/>
+                        <Label Content="Выберите дату продажи"/>
+                        <DatePicker x:Name="date" Margin="10" Text="{Binding Date}"/>
+                    </StackPanel>
+                    <Button Content="+" Width="100" Command="{Binding AddCommand}" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
